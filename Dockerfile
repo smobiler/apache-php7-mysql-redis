@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y apt-utils && apt-get dist-upgrade -y &&
 
 # Fetch payload
 
-RUN git clone "https://github.com/cvsouth/development.git" "/root/development-environment" && chmod 775 /root/development-environment/payload/*.sh && chmod +x /root/development-environment/payload/*.sh
+RUN git clone "https://github.com/cvsouth/apache-php7-mysql-redis.git" "/root/development-environment" && chmod 775 /root/development-environment/payload/*.sh && chmod +x /root/development-environment/payload/*.sh
 
 # MySQL
 
