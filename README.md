@@ -4,5 +4,7 @@
 <p>For an environment template which uses this as it's base image see <a href="https://github.com/cvsouth/template-environment">cvsouth/template-environment</a>.</p>
 ## Known limitations
 ### Database persistence
-<p>Database will be wiped every time the image is started. Will revisit soon.</p>
-<p>You have to run composer manually from the project folder.</p>
+<ul>
+  <li>Database will be wiped every time the image is started. Will revisit soon.</li>
+  <li>You have to run composer manually from the project folder.</li>
+</ul>
