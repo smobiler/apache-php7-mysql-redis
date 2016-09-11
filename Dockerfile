@@ -74,7 +74,6 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv C7917B12 && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 RUN cp /root/development-environment/payload/redis.conf /etc/redis/redis.conf
-EXPOSE 6379
 
 # Run scripts
 
