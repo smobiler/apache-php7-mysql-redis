@@ -66,6 +66,10 @@ EXPOSE 80
 RUN curl -sS https://getcomposer.org/installer | php
 RUN sudo mv composer.phar /usr/local/bin/composer
 
+# NodeJS / NPM
+
+RUN apt-get install -y nodejs npm && npm install gulp -g
+
 # Redis
 
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv C7917B12 && \
