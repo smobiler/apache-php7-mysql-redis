@@ -3,5 +3,5 @@
 ## Known limitations (Todo)
 <ul>
   <li>Database will be wiped every time the image is started.</li>
-  <li>You have to run composer manually from the project folder.</li>
+  <li>You have to run composer and npm install manually from the project folder.</li>
 </ul>
