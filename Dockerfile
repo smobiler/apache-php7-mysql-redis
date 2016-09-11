@@ -68,7 +68,7 @@ RUN sudo mv composer.phar /usr/local/bin/composer
 
 # NodeJS / NPM
 
-RUN apt-get install -y nodejs npm && npm install gulp -g
+RUN apt-get install -y nodejs npm && npm install gulp && ln -s /usr/bin/nodejs /usr/bin/node && npm install
 
 # Redis
 
