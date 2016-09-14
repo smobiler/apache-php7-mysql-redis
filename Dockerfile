@@ -18,7 +18,7 @@ RUN git clone "https://github.com/cvsouth/apache-php7-mysql-redis.git" "/root/de
 # MySQL
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y mysql-server
-RUN cp /root/development-environment/payload/my.cnf /etc/mysql/my.cnf
+RUN cp /root/development-environment/payload/mysqld.cnf /etc/mysql/mysql.conf.d/mysqld.cnf
 RUN echo "mysqld_safe &" > /tmp/config && \
     echo "mysqladmin --silent --wait=30 ping || exit 1" >> /tmp/config && \
     bash /tmp/config && \
