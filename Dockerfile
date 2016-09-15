@@ -5,7 +5,9 @@ MAINTAINER Colin South <colinvsouth@gmail.com>
 
 WORKDIR /root/development-environment
 ENV DEBIAN_FRONTEND noninteractive
-RUN echo "LANG=\"en_GB.UTF-8\"" > /etc/default/locale && echo "Europe/London" > /etc/timezone && locale-gen en_GB.UTF-8 && dpkg-reconfigure locales && dpkg-reconfigure -f noninteractive tzdata
+RUN sudo echo "Europe/London" > /etc/timezone
+RUN sudo dpkg-reconfigure -f noninteractive tzdata
+#RUN echo "LANG=\"en_GB.UTF-8\"" > /etc/default/locale && echo "Europe/London" > /etc/timezone && locale-gen en_GB.UTF-8 && dpkg-reconfigure locales && dpkg-reconfigure -f noninteractive tzdata
 
 # Upgrade
 
@@ -21,7 +23,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y mysql-server
 RUN cp /root/development-environment/payload/mysqld.cnf /etc/mysql/mysql.conf.d/mysqld.cnf
 RUN echo "mysqld_safe &" > /tmp/config && \
     echo "mysqladmin --silent --wait=30 ping || exit 1" >> /tmp/config && \
-    echo "mysql -u root -e \"ALTER USER 'root'@'%' IDENTIFIED BY 'secret'; GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'secret' WITH GRANT OPTION; FLUSH PRIVILEGES;\"" >> /tmp/config && \
+    echo "mysql -u root -e \"GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'secret' WITH GRANT OPTION; FLUSH PRIVILEGES; ALTER USER 'root'@'%' IDENTIFIED BY 'secret'; \"" >> /tmp/config && \
     bash /tmp/config && \
     rm -f /tmp/config
 VOLUME ["/etc/mysql", "/var/lib/mysql"]
