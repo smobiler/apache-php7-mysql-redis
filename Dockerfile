@@ -21,7 +21,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y mysql-server
 RUN cp /root/development-environment/payload/mysqld.cnf /etc/mysql/mysql.conf.d/mysqld.cnf
 RUN echo "mysqld_safe &" > /tmp/config && \
     echo "mysqladmin --silent --wait=30 ping || exit 1" >> /tmp/config && \
-    echo "mysql -u root -e 'GRANT ALL PRIVILEGES ON *.* TO \'root\'@\'%\' IDENTIFIED BY \'secret\' WITH GRANT OPTION; FLUSH PRIVILEGES;'" >> /tmp/config && \
+    echo "mysql -u root -e \"GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'secret' WITH GRANT OPTION; FLUSH PRIVILEGES;\"" >> /tmp/config && \
     bash /tmp/config && \
     rm -f /tmp/config
 VOLUME ["/etc/mysql", "/var/lib/mysql"]
