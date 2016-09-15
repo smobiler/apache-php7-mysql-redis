@@ -4,18 +4,21 @@ MAINTAINER Colin South <colinvsouth@gmail.com>
 # Initialise
 
 WORKDIR /root/development-environment
+
 ENV DEBIAN_FRONTEND noninteractive
-RUN sudo echo "Europe/London" > /etc/timezone
-RUN sudo dpkg-reconfigure -f noninteractive tzdata
-#RUN echo "LANG=\"en_GB.UTF-8\"" > /etc/default/locale && echo "Europe/London" > /etc/timezone && locale-gen en_GB.UTF-8 && dpkg-reconfigure locales && dpkg-reconfigure -f noninteractive tzdata
 
 # Upgrade
 
-RUN apt-get update && apt-get install -y apt-utils && apt-get dist-upgrade -y && apt-get install -y curl sudo git software-properties-common zsh htop
+RUN apt-get update && apt-get install -y apt-utils && apt-get dist-upgrade -y && apt-get install -y curl sudo git software-properties-common zsh htop locales
 
 # Fetch payload
 
 RUN git clone "https://github.com/cvsouth/apache-php7-mysql-redis.git" "/root/development-environment" && chmod 775 /root/development-environment/payload/*.sh && chmod +x /root/development-environment/payload/*.sh
+
+# Time
+
+RUN echo "Europe/London" > /etc/timezone; dpkg-reconfigure -f noninteractive tzdata
+RUN export LANGUAGE=en_US.UTF-8; export LANG=en_US.UTF-8; export LC_ALL=en_US.UTF-8; locale-gen en_US.UTF-8; DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales
 
 # MySQL
 
@@ -29,6 +32,8 @@ RUN echo "mysqld_safe &" > /tmp/config && \
 VOLUME ["/etc/mysql", "/var/lib/mysql"]
 CMD ["mysqld_safe"]
 EXPOSE 3306
+
+RUN curl http://ffmpeg.gusari.org/static/64bit/ffmpeg.static.64bit.latest.tar.gz | tar xfvz - -C /usr/local/bin && apt-get install -y lame
 
 # Apache PHP
 
