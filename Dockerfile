@@ -26,7 +26,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y mysql-server
 RUN cp /root/development-environment/payload/mysqld.cnf /etc/mysql/mysql.conf.d/mysqld.cnf
 RUN echo "mysqld_safe &" > /tmp/config && \
     echo "mysqladmin --silent --wait=30 ping || exit 1" >> /tmp/config && \
-    echo "mysql -u root -e \"SET PASSWORD FOR 'root'@'%' = PASSWORD('secret'); FLUSH PRIVILEGES; GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION; FLUSH PRIVILEGES; \"" >> /tmp/config && \
+#    echo "mysql -h 127.0.0.1 -u root -e \"SET PASSWORD FOR 'root'@'%' = PASSWORD('secret'); FLUSH PRIVILEGES; \"" >> /tmp/config && \
+    echo "mysql -h 127.0.0.1 -u root -e \"GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'secret' WITH GRANT OPTION; FLUSH PRIVILEGES; \"" >> /tmp/config && \
 #    echo "mysql -u root -e \"ALTER USER 'root'@'%' IDENTIFIED BY 'secret'; \"" >> /tmp/config && \
 #    echo "mysql -u root -e \"FLUSH PRIVILEGES; \"" >> /tmp/config && \
     bash /tmp/config && \
