@@ -23,15 +23,36 @@ RUN export LANGUAGE=en_US.UTF-8; export LANG=en_US.UTF-8; export LC_ALL=en_US.UT
 # MySQL
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y mysql-server
-RUN cp /root/development-environment/payload/mysqld.cnf /etc/mysql/mysql.conf.d/mysqld.cnf
-RUN echo "mysqld_safe &" > /tmp/config && \
-    echo "mysqladmin --silent --wait=30 ping || exit 1" >> /tmp/config && \
+RUN cp /root/development-environment/payload/mysqld.cnf /etc/mysql/mysql.conf.d/mysqld.cnf && \
+#    echo "mysqld_safe --skip-grant-tables --skip-networking &" > /tmp/config && \
+#    echo "mysqladmin --silent --wait=30 ping || exit 1" >> /tmp/config && \
+
+
+
 #    echo "mysql -h 127.0.0.1 -u root -e \"SET PASSWORD FOR 'root'@'%' = PASSWORD('secret'); FLUSH PRIVILEGES; \"" >> /tmp/config && \
-    echo "mysql -h 127.0.0.1 -u root -e \"GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'secret' WITH GRANT OPTION; FLUSH PRIVILEGES; \"" >> /tmp/config && \
+
+
+
+
+
+#    echo "mysql -u root -e \"   FLUSH PRIVILEGES; \
+#                                ALTER USER 'root'@'%' IDENTIFIED BY 'secret'; \
+#                                FLUSH PRIVILEGES; \"" >> /tmp/config && \
+#    echo "service mysql start && killall mysqld_safe" >> /tmp/config && \
+#
+    echo "mysqld_safe --skip-networking &" > /tmp/config && \
+    echo "mysqladmin --silent --wait=30 ping || exit 1" >> /tmp/config && \
+#    echo "mysql -u root -p\"secret\" -e \"  GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION; \
+#                                FLUSH PRIVILEGES; \"" >> /tmp/config && \
+
+
+
+
 #    echo "mysql -u root -e \"ALTER USER 'root'@'%' IDENTIFIED BY 'secret'; \"" >> /tmp/config && \
 #    echo "mysql -u root -e \"FLUSH PRIVILEGES; \"" >> /tmp/config && \
     bash /tmp/config && \
     rm -f /tmp/config
+
 VOLUME ["/etc/mysql", "/var/lib/mysql"]
 CMD ["mysqld_safe"]
 EXPOSE 3306
