@@ -58,7 +58,8 @@ RUN apt-get install -y \
     php7.0-xml \
     memcached \
     php-memcache \
-    imagemagick
+    imagemagick \
+    php-imagick
 
 ENV APACHE_RUN_USER    www-data
 ENV APACHE_RUN_GROUP   www-data
