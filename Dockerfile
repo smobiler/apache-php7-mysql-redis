@@ -9,7 +9,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 # Upgrade
 
-RUN apt-get update && apt-get install -y apt-utils && apt-get dist-upgrade -y && apt-get install -y curl sudo git software-properties-common zsh htop locales
+RUN apt-get update && apt-get install -y apt-utils && apt-get dist-upgrade -y && apt-get install -y curl sudo git software-properties-common zsh htop locales wget
 
 # Fetch payload
 
@@ -88,9 +88,21 @@ RUN apt-get install -y nodejs npm && npm install gulp && ln -s /usr/bin/nodejs /
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv C7917B12 && \
     apt-key update && apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y redis-server && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+    #apt-get clean && \
+    #rm -rf /var/lib/apt/lists/*
 RUN cp /root/development-environment/payload/redis.conf /etc/redis/redis.conf
+
+# Xdebug
+
+RUN wget http://xdebug.org/files/xdebug-2.4.1.tgz && \
+    tar -xvzf xdebug-2.4.1.tgz && \
+    cd xdebug-2.4.1 && \
+    phpize && \
+    ./configure && \
+    make && \
+    cp modules/xdebug.so /usr/lib/php/20151012 && \
+    echo "zend_extension = /usr/lib/php/20151012/xdebug.so" >> /etc/php/7.0/cli/php.ini && \
+    cd ..
 
 # Run scripts
 
