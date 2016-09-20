@@ -70,6 +70,7 @@ ENV APACHE_LOG_DIR     /var/log/apache2
 ENV LANG               C
 RUN a2enmod php7.0 && a2enmod rewrite
 RUN sed -i "s/short_open_tag = Off/short_open_tag = On/" /etc/php/7.0/apache2/php.ini
+RUN cp /root/development-environment/payload/apache.conf /etc/apache2/apache.conf
 RUN cp /root/development-environment/payload/000-default.conf /etc/apache2/sites-available/000-default.conf
 VOLUME ["/var/www"]
 EXPOSE 80
@@ -87,7 +88,7 @@ RUN apt-get install -y nodejs npm && npm install gulp && ln -s /usr/bin/nodejs /
 
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv C7917B12 && \
     apt-key update && apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y redis-server && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y redis-server # && \
     #apt-get clean && \
     #rm -rf /var/lib/apt/lists/*
 RUN cp /root/development-environment/payload/redis.conf /etc/redis/redis.conf
