@@ -104,7 +104,7 @@ RUN wget http://xdebug.org/files/xdebug-2.4.1.tgz && \
     cp modules/xdebug.so /usr/lib/php/20151012 && \
     echo "" >> /etc/php/7.0/cli/php.ini && \
     echo "[xdebug]" >> /etc/php/7.0/cli/php.ini && \
-    echo "zend_extension = /usr/lib/ph5/20151012/xdebug.so" >> /etc/php/7.0/cli/php.ini && \
+    echo "zend_extension = /usr/lib/php/20151012" >> /etc/php/7.0/cli/php.ini && \
     echo "xdebug.remote_enable=on" >> /etc/php/7.0/cli/php.ini && \
     echo "xdebug.remote_handler=dbgp" >> /etc/php/7.0/cli/php.ini && \
     echo "xdebug.remote_mode=req" >> /etc/php/7.0/cli/php.ini && \
@@ -116,7 +116,7 @@ RUN wget http://xdebug.org/files/xdebug-2.4.1.tgz && \
     echo "xdebug.idekey=PHPSTORM" >> /etc/php/7.0/cli/php.ini && \
     echo "" >> /etc/php/7.0/apache2/php.ini && \
     echo "[xdebug]" >> /etc/php/7.0/apache2/php.ini && \
-    echo "zend_extension = /usr/lib/ph5/20151012/xdebug.so" >> /etc/php/7.0/apache2/php.ini && \
+    echo "zend_extension = /usr/lib/php/20151012" >> /etc/php/7.0/apache2/php.ini && \
     echo "xdebug.remote_enable=on" >> /etc/php/7.0/apache2/php.ini && \
     echo "xdebug.remote_handler=dbgp" >> /etc/php/7.0/apache2/php.ini && \
     echo "xdebug.remote_mode=req" >> /etc/php/7.0/apache2/php.ini && \
