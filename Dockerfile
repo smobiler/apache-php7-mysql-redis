@@ -4,6 +4,7 @@ MAINTAINER Colin South <colinvsouth@gmail.com>
 # Initialise
 
 WORKDIR /root/development-environment
+VOLUME ["/var/www", "/var/lib/mysql"]
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -72,7 +73,6 @@ RUN a2enmod php7.0 && a2enmod rewrite
 RUN sed -i "s/short_open_tag = Off/short_open_tag = On/" /etc/php/7.0/apache2/php.ini
 RUN cp /root/development-environment/payload/apache.conf /etc/apache2/apache.conf
 RUN cp /root/development-environment/payload/000-default.conf /etc/apache2/sites-available/000-default.conf
-VOLUME ["/var/www"]
 EXPOSE 80
 
 # Composer
