@@ -4,7 +4,7 @@ MAINTAINER Colin South <colinvsouth@gmail.com>
 # Initialise
 
 WORKDIR /root/development-environment
-VOLUME ["/var/www", "/var/lib/mysql"]
+VOLUME ["/var/www"]
 
 ENV DEBIAN_FRONTEND noninteractive
 
