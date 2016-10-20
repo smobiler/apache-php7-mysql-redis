@@ -37,6 +37,8 @@ VOLUME ["/etc/mysql", "/var/lib/mysql"]
 CMD ["mysqld_safe"]
 EXPOSE 3306
 
+# ffmpeg
+
 RUN curl http://ffmpeg.gusari.org/static/64bit/ffmpeg.static.64bit.latest.tar.gz | tar xfvz - -C /usr/local/bin && apt-get install -y lame
 
 # Apache PHP
